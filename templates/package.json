@@ -1,0 +1,15 @@
+{
+    "name": "applicationame",
+    "version": "1.0.0",
+    "description": "A custom cli",
+    "main": "server.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "__AUTHOR__",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+  
