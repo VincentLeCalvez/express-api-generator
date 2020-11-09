@@ -6,5 +6,6 @@ const router = Router()
 router
     .route('/')
     .get(controllers.getMany)
+    .post(controllers.createOne)
 
 module.exports = router

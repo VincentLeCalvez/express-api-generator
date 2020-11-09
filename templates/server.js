@@ -2,8 +2,12 @@ const express = require('express')
 const { connect } = require('./db.js')
 const config = require('./config')
 const router = require ('./collection/collection.router')
+const { json, urlencoded } = require('body-parser')
 
 const app = express()
+
+app.use(json())
+app.use(urlencoded({ extended: true }))
 
 app.use('/collection', router)
  
