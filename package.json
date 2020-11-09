@@ -4,7 +4,8 @@
   "description": "A custom cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node index.js"
   },
   "author": "Vincent Le Calvez",
   "license": "ISC",
@@ -12,7 +13,7 @@
     "commander": "^6.2.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "inquirer": "^7.3.3",
-    "uuid": "^8.3.1"
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.3"
   }
 }
