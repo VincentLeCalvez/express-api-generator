@@ -1,5 +1,6 @@
 const utils = require('./utils')
 const path = require('path')
+const { createDir } = require('./utils')
 
 //TODO optimize
 const replace = (file, collection) => {
@@ -8,12 +9,13 @@ const replace = (file, collection) => {
     .replace(/Collection/g, collection.charAt(0).toUpperCase() + collection.slice(1))
 }
 
-const createCollections = (dirName, collections) => {
+const createCollections = (createdDir, collections) => {
     for(var i = 0; i < collections.length; i++) {
-    const srcDir = path.join(__dirname, 'templates/collection')
-    const tgtDir = path.join(dir, collections[i])
-  
-    utils.createDir(path.join(dirName, collections[i]))
+    // TODO -- get srcDir path by another mean
+    const srcDir = path.join(path.dirname(createdDir), 'templates', 'collection')
+    const tgtDir = path.join(createdDir, collections[i])
+     
+    utils.createDir(createdDir, collections[i])
     
     // ROUTER FILE 
     routerFile = utils.readFile(path.join(srcDir, 'collection.router.js' ))

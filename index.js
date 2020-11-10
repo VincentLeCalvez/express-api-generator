@@ -2,6 +2,7 @@ const  { program } = require('commander')
 const path = require('path')
 const utils = require('./utils/utils') 
 const { generateRouteImports, createCollections} = require('./utils/generate')
+const { createDir } = require('./utils/utils')
 
 program
   .option('-p, --port <type>', 'add the specified port', '3000')
@@ -11,19 +12,19 @@ program
  
 program.parse(process.argv);
 
-dir = utils.createDir(program.dirName)
+createdDir = utils.createDir(__dirname, program.dirName)
 
 // PACKAGE FILE
 packageFile = utils.readFile(path.join(__dirname, 'templates/package.json' ))
-utils.createFile(path.join(dir, 'package.json'), packageFile)
+utils.createFile(path.join(createdDir, 'package.json'), packageFile)
 
 // DB FILE
 dbFile = utils.readFile(path.join(__dirname, 'templates/db.js' ))
-utils.createFile(path.join(dir, 'db.js'), dbFile)
+utils.createFile(path.join(createdDir, 'db.js'), dbFile)
 
 // CRUD FILE
 crudFile = utils.readFile(path.join(__dirname, 'templates/crud.js' ))
-utils.createFile(path.join(dir, 'crud.js'), crudFile)
+utils.createFile(path.join(createdDir, 'crud.js'), crudFile)
 
 
 // CONFIG FILE
@@ -31,7 +32,7 @@ configFile = utils.readFile(path.join(__dirname, 'templates/config.js' ))
 configData = configFile
 .replace(/__PORT__/g, program.port)
 .replace(/__DBURL__/g, program.dbUrl)
-utils.createFile(path.join(dir, 'config.js'), configData)
+utils.createFile(path.join(createdDir, 'config.js'), configData)
 
 
 // SERVER FILE
@@ -41,8 +42,8 @@ serverFile = utils.readFile(path.join(__dirname, 'templates/server.js' ))
 serverData = serverFile
 .replace(/__ROUTES__/g, generateRouteImports(program.collections, requireStr))
 .replace(/__USEROUTES__/g, generateRouteImports(program.collections, useStr))
-utils.createFile(path.join(dir, 'server.js'), serverData)
+utils.createFile(path.join(createdDir, 'server.js'), serverData)
 
 
-createCollections(program.dirName, program.collections)
+createCollections(createdDir, program.collections)
  
