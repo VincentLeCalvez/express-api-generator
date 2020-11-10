@@ -12,8 +12,14 @@ const readFile = (path) => {
     return fs.readFileSync(path,  {encoding: "utf8"})
 }
 
+const collect = (value, previous) => {
+    return previous.concat([value]);
+  }
+  
+
 module.exports = {
     createDir,
     createFile,
-    readFile
+    readFile,
+    collect
 }

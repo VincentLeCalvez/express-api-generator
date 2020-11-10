@@ -1,5 +1,8 @@
 const express = require('express')
 const { json, urlencoded } = require('body-parser')
+const morgan = require('morgan')
+const cors = require('cors')
+
 const { connect } = require('./db.js')
 const config = require('./config')
 
@@ -7,8 +10,10 @@ __ROUTES__
 
 const app = express()
 
+app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
+app.use(morgan('dev'))
 
 __USEROUTES__
  
