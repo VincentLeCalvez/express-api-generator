@@ -1,10 +1,7 @@
-const utils = require('./utils') 
-const { generateRouteImports, createCollections} = require('./generate')
 const  { program } = require('commander')
 const path = require('path')
-const config = require('./templates/config');
-const { collection } = require('./templates/collection/collection.model');
-
+const utils = require('./utils/utils') 
+const { generateRouteImports, createCollections} = require('./utils/generate')
 
 program
   .option('-p, --port <type>', 'add the specified port', '3000')
