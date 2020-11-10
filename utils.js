@@ -12,13 +12,8 @@ const readFile = (path) => {
     return fs.readFileSync(path,  {encoding: "utf8"})
 }
 
-const copyDirectory = (source, target) => {
-    fs.copySync(source, target)
-}
-
 module.exports = {
     createDir,
     createFile,
-    readFile,
-    copyDirectory
+    readFile
 }

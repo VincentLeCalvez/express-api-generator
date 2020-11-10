@@ -1,15 +1,16 @@
 const express = require('express')
+const { json, urlencoded } = require('body-parser')
 const { connect } = require('./db.js')
 const config = require('./config')
-const router = require ('./collection/collection.router')
-const { json, urlencoded } = require('body-parser')
+
+__ROUTES__
 
 const app = express()
 
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
-app.use('/collection', router)
+__USEROUTES__
  
 const start = async() => {
   try {
