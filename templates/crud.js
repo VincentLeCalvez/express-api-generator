@@ -1,6 +1,4 @@
-const { createPromptModule } = require("inquirer")
-
- const getMany = model => async (req, res) => {
+const getMany = model => async (req, res) => {
   try {
     const docs = await model
       .find({})
@@ -17,41 +15,53 @@ const { createPromptModule } = require("inquirer")
 const getOne = model => async (req, res) => {
   try {
     const doc = await model
-      .findOne({_id: req.params.id})
+      .findOne({ _id: req.params.id })
       .lean()
       .exec()
 
-    res.status(200).json({data: doc})
+    res.status(200).json({ data: doc })
   } catch (e) {
     console.log(e)
     res.status(400).end()
   }
 }
 
-const createOne = model => async(req, res) => {
+const createOne = model => async (req, res) => {
   try {
     const created = await model
-    .create(req.body)
+      .create(req.body)
 
-    res.status(200).json({data: created})
+    res.status(200).json({ data: created })
   } catch (e) {
     console.log(e)
     res.status(400).end()
   }
 }
 
-const updateOne = model => async (req,res) => {
+const updateOne = model => async (req, res) => {
   try {
-    const doc = model.findOneAndUpdate({_id: req.params.id}, req.body, {new: true} )
+    const doc = await model.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+      .lean()
+      .exec()
+
+    if (!doc) {
+      res.status(400).end()
+    }
+    res.status(200).json({ data: doc })
   } catch (e) {
     console.log(e)
     res.status(404).end()
   }
 }
 
-const removeOne = model => async (req,res) => {
+const removeOne = model => async (req, res) => {
   try {
-    const doc = model.findOneAndRemove({_id: req.params.id})
+    const doc = await model.findOneAndRemove({ _id: req.params.id })
+    res.status(200).json({ data: doc })
+
+    if (!doc) {
+      res.status(400).end()
+    }
   } catch (e) {
     console.log(e)
     res.status(404).end()
@@ -59,13 +69,13 @@ const removeOne = model => async (req,res) => {
 }
 
 const crudControllers = model => ({
-    getMany: getMany(model),
-    getOne: getOne(model),
-    createOne: createOne(model),
-    updateOne: updateOne(model),
-    removeOne: removeOne(model)
+  getMany: getMany(model),
+  getOne: getOne(model),
+  createOne: createOne(model),
+  updateOne: updateOne(model),
+  removeOne: removeOne(model)
 })
 
 module.exports = {
-    crudControllers
+  crudControllers
 }
