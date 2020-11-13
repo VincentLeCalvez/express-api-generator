@@ -40,7 +40,8 @@ const createOne = model => async (req, res) => {
 
 const updateOne = model => async (req, res) => {
   try {
-    const doc = await model.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    const doc = await model
+      .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .lean()
       .exec()
 

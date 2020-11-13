@@ -32,7 +32,6 @@ const generateRouteImports = (collections, srcImports) => {
     const tgtStr = srcImports
       .replace(/__router/g, collection + 'Router')
       .replace(/collection/g, collection)
-
     return acc + tgtStr
   }, '')
 }
