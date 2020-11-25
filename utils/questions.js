@@ -14,12 +14,14 @@ const questions = [
   {
     type: 'input',
     name: 'dbUrl',
-    message: 'url of database'
+    message: 'url of database',
+    default: 'mongodb://localhost:27017/api'
   },
   {
     type: 'input',
     name: 'collections',
-    message: 'name of collections (separate with space)'
+    message: 'name of collections (separate with space)',
+    default: 'data'
   }
 ]
 
